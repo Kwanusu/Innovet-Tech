@@ -5,6 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Meet the architects of digital excellence at Innovet Tech.">
     <title>Our Team | Innovet Tech</title>
+    <link rel="stylesheet" href="team.css">
+</head>
+<body class="team-page">
+
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-wrapper">
+                <div class="logo-icon"><img src="images/logo.png" alt="Logo"></div>
+                <span class="logo-text">Innovet<span class="accent-light">Tech</span></span>
+            </div>
+
+            <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+            <label for="menu-toggle" class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </label>
+
+            <nav class="desktop-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="team.html" class="nav-link active">Team</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <label for="menu-toggle" class="menu-overlay"></label>
+        </div>
+    </header>
+
+    <main class="py-24">
+        <section class="container text-center mb-20">
+            <span class="overline">Human Intelligence</span>
+            <h1 class="hero-title">The <span class="text-accent italic">Visionaries.</span></h1>
+            <p class="section-desc">Innovet Tech is led by a global collective of engineers, designers, and strategists dedicated to the gold standard of execution.</p>
+        </section>
+
+        <section class="container team-grid">
+            <div class="team-card group">
+                <div class="member-image-wrap">
+                    <img src="images/pexels-roy-smoothe-3775491-13473280.jpg" alt="Joseph" class="member-img grayscale">
+                    <div class="member-overlay-info">
+                        <p class="expertise-tag">Expertise: Systems Architecture</p>
+                        <p class="member-quote">"Innovation is the result of relentless precision and the courage to challenge legacy systems."</p>
+                        <a href="#" class="profile-link">VIEW PROFILE</a>
+                    </div>
+                </div>
+                <div class="member-footer">
+                    <div>
+                        <h3 class="member-name">Joseph</h3>
+                        <p class="member-role">Chief Executive Architect</p>
+                    </div>
+                    <div class="member-id">01</div>
+                </div>
+            </div>
+
+            <div class="team-card group">
+                <div class="member-image-wrap">
+                    <img src="images/pexels-tima-miroshnichenko-6091295.jpg" alt="Chalie" class="member-img grayscale">
+                    <div class="member-overlay-info">
+                        <p class="expertise-tag">Expertise: Zero Trust Security</p>
+                        <p class="member-quote">"Resilience isn't built by stopping threats, but by building systems that cannot be broken."</p>
+                        <a href="#" class="profile-link">VIEW PROFILE</a>
+                    </div>
+                </div>
+                <div class="member-footer">
+                    <div>
+                        <h3 class="member-name">Chalie</h3>
+                        <p class="member-role">Head of Cyber Intelligence</p>
+                    </div>
+                    <div class="member-id">02</div>
+                </div>
+            </div>
+
+            <div class="team-card group">
+                <div class="member-image-wrap">
+                    <img src="images/pexels-shkrabaanthony-7163352.jpg" alt="Ezekiel" class="member-img grayscale">
+                    <div class="member-overlay-info">
+                        <p class="expertise-tag">Expertise: Hybrid Cloud Migration</p>
+                        <p class="member-quote">"Complexity is the enemy. Our job is to find the elegant path through the infrastructure maze."</p>
+                        <a href="#" class="profile-link">VIEW PROFILE</a>
+                    </div>
+                </div>
+                <div class="member-footer">
+                    <div>
+                        <h3 class="member-name">Ezekiel</h3>
+                        <p class="member-role">Director of Cloud Infrastructure</p>
+                    </div>
+                    <div class="member-id">03</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container career-section">
+            <div class="career-box">
+                <div class="career-header">
+                    <span class="overline">Careers</span>
+                    <h2 class="sub-title">Join the Collective.</h2>
+                    <p class="text-secondary">We are always looking for elite talent to help us redefine digital architecture.</p>
+                </div>
+
+                <form action="success.html" method="GET" class="upload-zone">
+                    <input type="file" id="resume-upload" class="file-input" required>
+                    <label for="resume-upload" class="drop-zone-ui">
+                        <div class="upload-icon-circle">
+                            <svg class="icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" stroke-width="1.5"></path></svg>
+                        </div>
+                        <p class="upload-main-text">Drop your dossier here</p>
+                        <p class="upload-sub-text">PDF or DOCX (Max 10MB)</p>
+                        <button type="submit" class="btn-submit-hidden">Submit Dossier</button>
+                    </label>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the architects of digital excellence at Innovet Tech.">
+    <title>Our Team | Innovet Tech</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-stone-950 text-stone-200 antialiased">
@@ -177,4 +303,4 @@
     </script>
 
 </body>
-</html>
+</html> -->
