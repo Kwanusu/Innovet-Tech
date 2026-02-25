@@ -5,6 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore Innovet Tech's core service offerings from Cloud to AI.">
     <title>Our Services | Innovet Tech</title>
+    <link rel="stylesheet" href="service.css">
+</head>
+<body class="site-body" id="top">
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-wrapper">
+                <div class="logo-icon"><img src="images/logo.png" alt="Logo"></div>
+                <span class="logo-text">Innovet<span class="accent-light">Tech</span></span>
+            </div>
+
+            <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+            
+            <label for="menu-toggle" class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </label>
+
+            <nav class="desktop-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="services.html" class="nav-link active">Services</a></li>
+                    <li><a href="team.html" class="nav-link">Team</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+                </ul>
+            </nav>
+            
+            <div class="menu-overlay"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="container">
+            <div class="section-intro">
+                <span class="overline">Expertise</span>
+                <h1 class="hero-title">Core Competencies</h1>
+                <div class="title-divider"></div>
+            </div>
+            
+            <div class="services-grid">
+                <article class="service-item">
+                    <div class="service-info">
+                        <h2 class="service-title">Enterprise <span class="text-accent">Cloud Migration</span></h2>
+                        <p class="service-description">Transition your legacy infrastructure to the cloud with zero downtime. We specialize in AWS, Azure, and Google Cloud hybrid environments.</p>
+                        <ul class="feature-list">
+                            <li><span class="bullet">✦</span> Infrastructure-as-Code (IaC)</li>
+                            <li><span class="bullet">✦</span> Multi-Region Redundancy</li>
+                            <li><span class="bullet">✦</span> Cost Optimization Audits</li>
+                        </ul>
+                    </div>
+                    <div class="service-visual">
+                        <div class="glow-effect"></div>
+                        <div class="image-card">
+                            <img src="images/cloud-architecture.jpg" alt="Enterprise Cloud Architecture" class="card-img">
+                            <div class="image-overlay"></div>
+                            <span class="image-tag">Cloud Architecture</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="service-item reverse">
+                    <div class="service-info">
+                        <h2 class="service-title">Cybersecurity <span class="text-accent">Resilience</span></h2>
+                        <p class="service-description">In an era of rising threats, we provide a proactive security posture using Zero Trust principles and military-grade encryption.</p>
+                        <ul class="feature-list">
+                            <li><span class="bullet">✦</span> Penetration Testing</li>
+                            <li><span class="bullet">✦</span> 24/7 Managed Detection (MDR)</li>
+                            <li><span class="bullet">✦</span> Compliance Readiness (GDPR/HIPAA)</li>
+                        </ul>
+                    </div>
+                    <div class="service-visual">
+                        <div class="glow-effect cyber"></div>
+                        <div class="image-card cyber-card">
+                            <img src="images/security.avif" alt="Cybersecurity Operations" class="card-img gray-scale">
+                            <div class="scanline-overlay"></div>
+                            <div class="image-overlay dark"></div>
+                            <div class="status-badge">
+                                <span class="pulse-text">System Status: Active</span>
+                                <span class="image-tag secondary">Security Ops</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p class="footer-copy">&copy; 2026 Innovet Tech • Gold Standard Solutions</p>
+    </footer>
+    <a href="#top" class="back-to-top" aria-label="Back to top">
+        <span class="arrow">↑</span>
+    </a>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Innovet Tech's core service offerings from Cloud to AI.">
+    <title>Our Services | Innovet Tech</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-stone-950 text-stone-200 antialiased">
@@ -116,4 +220,5 @@
         <p class="text-stone-600 text-sm tracking-[0.3em] uppercase">&copy; 2026 Innovet Tech • Gold Standard Solutions</p>
     </footer>
 </body>
-</html>
+</html> -->
+
