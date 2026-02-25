@@ -464,6 +464,7 @@ html {
     display: none; /* Hidden on desktop */
     cursor: pointer;
     flex-direction: column;
+    background-color: var(--amber-500);
     gap: 6px;
     z-index: 1100;
 }
@@ -471,16 +472,15 @@ html {
 .bar {
     width: 25px;
     height: 2px;
-    background: var(--text-muted); /* Matches your nav links color */
+    background: var(--text-muted); 
     transition: 0.3s ease;
 }
 
 /* --- Mobile Drawer Logic --- */
 @media (max-width: 768px) {
     .hamburger { 
-        display: flex;
-        color: #f59e0b; 
-        margin-left: auto; /* Pushes hamburger to the far right */
+        display: flex; 
+        margin-left: auto; 
     }
 
     .main-nav {
