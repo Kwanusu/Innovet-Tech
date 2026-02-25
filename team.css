@@ -1,0 +1,764 @@
+/* --- Variables & Core Architecture --- */
+:root {
+    --bg-color: #0c0a09;
+    --text-primary: #e7e5e4;
+    --text-secondary: #a8a29e;
+    --accent: #f59e0b;
+    --accent-dark: #d97706;
+    --border: rgba(245, 158, 11, 0.2);
+    --glass-bg: rgba(12, 10, 9, 0.85);
+    --font-main: system-ui, -apple-system, sans-serif;
+    --nav-width: 240px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* --- Header & Navigation --- */
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    background-color: var(--glass-bg);
+}
+
+.header-content {
+    display: flex;
+    height: 5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo-wrapper { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.75rem; 
+}
+
+.logo-icon {
+    width: 2.5rem; 
+    height: 2.5rem;
+    background: linear-gradient(to top right, var(--accent-dark), #fcd34d);
+    border-radius: 0.5rem; 
+    overflow: hidden;
+}
+.logo-icon img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    padding: 0.4rem; 
+}
+
+.logo-text { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    color: #fff; 
+}
+.accent-light { 
+    color: var(--accent); 
+    font-weight: 300; 
+}
+
+/* Menu Logic */
+.menu-checkbox { 
+    display: none; 
+}
+
+.hamburger {
+    display: none; 
+    flex-direction: column; 
+    justify-content: space-between;
+    width: 26px; 
+    height: 18px; 
+    cursor: pointer; 
+    z-index: 120;
+}
+
+.hamburger .bar { 
+    height: 2px; 
+    width: 100%; 
+    background-color: var(--accent); 
+    transition: 0.4s ease; 
+}
+
+
+.nav-list { 
+    list-style: none; 
+    display: flex; 
+    gap: 2rem; 
+}
+.nav-link { 
+    text-decoration: none; 
+    color: var(--text-secondary); 
+    font-weight: 500; 
+    text-transform: uppercase; 
+    font-size: 0.85rem; 
+    transition: 0.3s;
+}
+.nav-link:hover, .nav-link.active { 
+    color: var(--accent); 
+}
+
+.nav-link.active { 
+    border-bottom: 2px solid var(--accent); 
+    padding-bottom: 4px; 
+}
+
+/* --- Team Hero Section --- */
+.py-24 { 
+    padding: 6rem 0; 
+}
+.text-center { 
+    text-align: center; 
+}
+.mb-20 { 
+    margin-bottom: 5rem; 
+}
+.overline { 
+    color: var(--accent); 
+    font-weight: 900; 
+    letter-spacing: 0.3em; 
+    text-transform: uppercase; 
+    font-size: 0.7rem; 
+}
+
+.hero-title { 
+    font-size: clamp(2.5rem, 8vw, 4.5rem); 
+    font-weight: 900; 
+    color: #fff; 
+    margin: 1rem 0; 
+}
+
+.section-desc { 
+    color: var(--text-secondary); 
+    max-width: 600px; 
+    margin: 0 auto; 
+    font-size: 1.1rem; 
+}
+
+/* --- Team Grid Architecture --- */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.team-card { 
+    position: relative; 
+}
+
+.member-image-wrap {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: #1c1917;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.member-img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(100%) brightness(0.8);
+    transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), filter 0.6s ease;
+    will-change: filter, transform;
+}
+
+.member-overlay-info {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(12, 10, 9, 0.95) 0%, rgba(12, 10, 9, 0.4) 60%, transparent 100%);
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end;
+    padding: 2rem; transform: translateY(102%);
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 5;
+}
+
+/* --- Shared Interaction States (Hover & Mobile Tap) --- */
+.team-card:hover .member-img,
+.team-card:active .member-img {
+    transform: scale(1.1);
+    filter: grayscale(0%) brightness(1);
+}
+
+.team-card:hover .member-overlay-info,
+.team-card:active .member-overlay-info {
+    transform: translateY(0);
+}
+
+.team-card:hover .member-name { 
+    color: var(--accent); 
+}
+
+/* --- Member Info Details --- */
+.expertise-tag { 
+    color: var(--accent); 
+    font-family: monospace; 
+    font-size: 0.7rem; 
+    margin-bottom: 0.5rem; 
+    text-transform: uppercase; 
+}
+
+.member-quote { 
+    font-style: italic; 
+    font-size: 0.95rem; 
+    margin-bottom: 1.5rem; 
+    color: var(--text-primary); 
+}
+
+.profile-link { 
+    color: var(--accent); 
+    font-weight: 800; 
+    font-size: 0.75rem; 
+    text-decoration: underline; 
+    text-underline-offset: 4px; 
+}
+
+.member-footer { 
+    margin-top: 1.5rem; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+}
+
+.member-name { 
+    font-size: 1.5rem; 
+    font-weight: 800; 
+    color: #fff; 
+    transition: color 0.3s; 
+}
+
+.member-role { 
+    font-size: 0.7rem; 
+    font-weight: 900; 
+    color: var(--text-secondary); 
+    text-transform: uppercase; 
+    letter-spacing: 0.1em; 
+}
+
+.member-id { 
+    font-size: 2.5rem; 
+    font-family: serif;  
+    color: rgba(245, 158, 11, 0.15); 
+    line-height: 1; user-select: none; 
+}
+
+/* --- Careers Section --- */
+.career-section { 
+    padding: 8rem 0; 
+    border-top: 1px solid #1c1917; 
+}
+
+.career-box {
+    max-width: 800px; 
+    margin: 0 auto; 
+    background: rgba(28,25,23,0.3);
+    border: 1px solid var(--border); 
+    border-radius: 2rem; padding: 4rem 2rem;
+}
+
+.upload-zone { 
+    position: relative; 
+    margin-top: 3rem; 
+}
+
+.file-input { 
+    position: absolute; 
+    inset: 0; 
+    opacity: 0; 
+    cursor: pointer; 
+    z-index: 10; 
+}
+
+.drop-zone-ui {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    padding: 3rem; 
+    border: 2px dashed #292524; 
+    border-radius: 1.5rem;
+    transition: 0.3s; 
+    background: rgba(12,10,9,0.5);
+}
+
+.upload-zone:hover .drop-zone-ui { 
+    border-color: var(--accent); 
+    background: rgba(12,10,9,0.8); 
+}
+
+.upload-icon-circle {
+    width: 4rem; 
+    height: 4rem; 
+    background: rgba(245,158,11,0.1);
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    margin-bottom: 1rem; 
+    color: var(--accent); 
+    transition: 0.3s;
+}
+
+.upload-zone:hover .upload-icon-circle { 
+    transform: scale(1.1) rotate(5deg); 
+}
+
+.icon-svg { 
+    width: 1.5rem; 
+    height: 1.5rem; 
+}
+
+.upload-main-text { 
+    font-weight: 700; 
+    color: #fff; 
+}
+
+.upload-sub-text { 
+    font-size: 0.8rem; 
+    color: var(--text-secondary); 
+    margin-top: 0.25rem; 
+}
+
+.btn-submit-hidden { 
+    display: none; 
+}
+
+/* --- Mobile Adjustments --- */
+@media (max-width: 767px) {
+    .hamburger { 
+        display: flex; 
+    }
+    
+    .nav-list {
+        position: fixed; 
+        top: 0; 
+        right: 0; 
+        width: var(--nav-width); 
+        height: 100vh;
+        background: #0f0d0c; 
+        flex-direction: column; 
+        padding: 6rem 2rem; 
+        gap: 1.5rem;
+        border-left: 1px solid var(--border); 
+        transform: translateX(101%);
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+        z-index: 110;
+    }
+    
+    .menu-checkbox:checked ~ .desktop-nav .nav-list { 
+        transform: translateX(0); 
+    }
+    
+    .menu-checkbox:checked ~ .hamburger .bar:nth-child(1) { 
+        transform: translateY(8px) rotate(45deg); 
+    }
+    
+    .menu-checkbox:checked ~ .hamburger .bar:nth-child(2) { 
+        opacity: 0; 
+    }
+    
+    .menu-checkbox:checked ~ .hamburger .bar:nth-child(3) { 
+        transform: translateY(-8px) rotate(-45deg); 
+    }
+    
+    .menu-overlay {
+        position: fixed; 
+        inset: 0; 
+        background: rgba(0,0,0,0.7); 
+        opacity: 0; 
+        visibility: hidden; 
+        transition: 0.4s; 
+        z-index: 101; 
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+    
+    .menu-checkbox:checked ~ .menu-overlay { 
+        opacity: 1; 
+        visibility: visible; 
+    }
+    
+    .member-footer {
+        background: var(--bg-color);
+        padding-top: 1rem;
+        position: relative;
+        z-index: 10;
+    }
+}
+
+    .member-footer {
+        background: var(--bg-color);
+        padding-top: 1rem;
+        position: relative;
+        z-index: 10;
+    }
+
+/* --- Legal Page Architecture --- */
+.legal-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.legal-header {
+    margin-bottom: 4rem;
+    border-left: 4px solid var(--accent);
+    padding-left: 2rem;
+}
+
+.timestamp {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    margin-top: 1rem;
+}
+
+/* Legal Cards */
+.legal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.legal-card {
+    background: rgba(28, 25, 23, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.legal-card:hover {
+    border-color: var(--accent);
+    transform: translateX(10px);
+}
+
+.card-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-family: serif;
+    font-style: italic;
+    font-size: 3rem;
+    color: rgba(245, 158, 11, 0.1);
+    line-height: 1;
+}
+
+.card-title {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.card-body {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* Exit Navigation */
+.exit-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.exit-text {
+    color: #fff;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.accent-icon {
+    color: var(--accent);
+    transition: transform 0.3s ease;
+}
+
+.exit-link:hover .accent-icon {
+    transform: translateX(-5px);
+}    
+
+/* --- Privacy Protocol Specifics --- */
+.protocol-card {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid #1c1917; /* Muted border */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 3rem;
+}
+
+/* The "Active" Protocol look */
+.protocol-card.active,
+.protocol-card:hover {
+    border-left-color: var(--accent);
+    transform: translateX(5px);
+}
+
+.protocol-card .card-number {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 2.5rem;
+    color: rgba(245, 158, 11, 0.05);
+    font-style: italic;
+    font-family: serif;
+}
+
+.protocol-card.active .card-number {
+    color: rgba(245, 158, 11, 0.15);
+}
+
+.highlight {
+    color: var(--text-primary);
+    font-family: monospace;
+    background: rgba(245, 158, 11, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.protocol-link {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 700;
+}
+
+/* --- Footer Refinement --- */
+.mainframe-footer {
+    padding: 3rem 0;
+    border-top: 1px solid #1c1917;
+    text-align: center;
+}
+
+.footer-status {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    opacity: 0.4;
+}
+
+/* Mobile Tweak */
+@media (max-width: 767px) {
+    .protocol-card {
+        padding-left: 1.5rem;
+    }
+    .hero-title {
+        line-height: 1.1;
+    }
+}
+
+/* --- Global Hero & Home Architecture --- */
+.hero-section { position: relative; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+
+.glow-orb {
+    position: absolute; top: -10%; right: -5%; width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+    filter: blur(60px); z-index: 0; pointer-events: none;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--accent-dark), #fcd34d, var(--accent-dark));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+}
+
+@keyframes shine { to { background-position: 200% center; } }
+
+/* Buttons */
+.btn-group { display: flex; gap: 1.5rem; margin-top: 2.5rem; }
+.btn-primary {
+    background: var(--accent); color: var(--bg-color); padding: 1rem 2rem;
+    border-radius: 0.75rem; font-weight: 800; text-decoration: none;
+    transition: 0.3s; box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
+}
+.btn-primary:hover { background: #fff; transform: translateY(-3px); }
+.btn-outline {
+    border: 2px solid #1c1917; color: var(--accent); padding: 1rem 2rem;
+    border-radius: 0.75rem; font-weight: 800; text-decoration: none; transition: 0.3s;
+}
+.btn-outline:hover { background: #1c1917; }
+
+/* Capability Cards (Flip Effect) */
+.capability-card { height: 320px; perspective: 1000px; }
+.card-inner {
+    position: relative; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    transform-style: preserve-3d;
+}
+.capability-card:hover .card-inner, .capability-card:active .card-inner { transform: rotateY(180deg); }
+
+.card-front, .card-back {
+    position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+    border-radius: 2rem; border: 1px solid var(--border); background: #141210;
+    padding: 2.5rem; display: flex; flex-direction: column; justify-content: center;
+}
+.card-back { transform: rotateY(180deg); background: var(--bg-color); }
+
+.icon-wrap { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
+.spec-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #1c1917; font-size: 0.9rem; }
+.spec-row span:last-child { color: #fff; font-weight: 700; }
+
+/* Footer */
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 4rem; }
+.footer-bottom { 
+    margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #1c1917;
+    text-align: center; font-size: 0.65rem; letter-spacing: 0.4em; opacity: 0.5;
+}
+.briefing-form { display: flex; border: 1px solid #1c1917; border-radius: 0.5rem; overflow: hidden; margin-top: 1.5rem; }
+.briefing-form input { background: transparent; border: none; padding: 0.75rem; color: #fff; flex: 1; outline: none; }
+.briefing-form button { background: var(--accent); border: none; padding: 0 1.5rem; font-weight: 900; cursor: pointer; }
+
+/* Back to Top */
+.btt-btn {
+    position: fixed; bottom: 2rem; right: 2rem; width: 3.5rem; height: 3.5rem;
+    background: var(--accent); color: var(--bg-color); border-radius: 50%;
+    border: none; cursor: pointer; opacity: 0; transform: translateY(20px);
+    transition: 0.4s; z-index: 90; font-size: 1.2rem;
+}
+.btt-btn.visible { opacity: 1; transform: translateY(0); }
+
+/* Mobile Hero */
+@media (max-width: 991px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero-info { display: flex; flex-direction: column; align-items: center; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+    .briefing-form { max-width: 400px; margin: 1.5rem auto 0; }
+}
+
+.capability-card {
+    perspective: 1000px;
+    height: 350px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    transform-style: preserve-3d;
+}
+
+/* Flip on Hover (Desktop) and Tap (Mobile) */
+.capability-card:hover .card-inner, 
+.capability-card:active .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 2rem;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: var(--bg-color);
+}
+
+/* --- Pure CSS Capability Cards --- */
+.capability-card {
+    perspective: 1000px;
+    height: 350px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Flip on Hover (Desktop) and Tap (Mobile) */
+.capability-card:hover .card-inner,
+.capability-card:active .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 2rem;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+}
+
+.card-back {
+    background: var(--bg-color);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- Pure CSS Back to Top (No-JS) --- */
+.btt-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: var(--accent);
+    color: var(--bg-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+}
+
+.btt-btn:hover {
+    transform: translateY(-5px);
+    background: #fff;
+}
+
+/* --- Smooth Scrolling (Global) --- */
+html {
+    scroll-behavior: smooth;
+}
